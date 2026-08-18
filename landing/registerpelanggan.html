@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar Pelanggan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #081225, #2563eb);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: #081225;
+            padding: 20px 6%;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .menu a:hover {
+            background: #2563eb;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            font-size: 55px;
+        }
+
+        .header h1 {
+            color: #081225;
+            margin: 10px 0;
+        }
+
+        .header p {
+            color: #64748b;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .success {
+            display: block;
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .error {
+            display: block;
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .login {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+        }
+
+        .login a {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        @media(max-width:750px) {
+
+            .navbar-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="navbar-content">
+
+            <a href="produk.html" class="logo">
+                 🛠 RazForge
+            </a>
+
+            <ul class="menu">
+
+                <li>
+                    <a href="produk.html">🏠 Beranda</a>
+                </li>
+
+                <li>
+                    <a href="produk.html">📖 Produk</a>
+                </li>
+
+                <li>
+                    <a href="kategori.html">📁 Kategori</a>
+                </li>
+
+                <li>
+                    <a href="kontak.html">☎️ Kontak</a>
+                </li>
+
+                <li>
+                    <a href="loginpelanggan.html">🔐 Login</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="header">
+
+                <div class="icon">  🛠 </div>
+
+                <h1>Daftar Pelanggan</h1>
+
+                <p>Buat akun untuk mulai membeli buku</p>
+
+            </div>
+
+
+            <div id="message" class="message"></div>
+
+
+            <form id="registerForm">
+
+
+                <div class="form-group">
+
+                    <label>Nama Lengkap</label>
+
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Username</label>
+
+                    <input type="text" id="username" placeholder="Buat username" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input type="email" id="email" placeholder="Masukkan email" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Password</label>
+
+                    <input type="password" id="password" placeholder="Minimal 6 karakter" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Konfirmasi Password</label>
+
+                    <input type="password" id="konfirmasi" placeholder="Ulangi password" required>
+
+                </div>
+
+
+                <button type="submit">
+                    📝 Daftar Sekarang
+                </button>
+
+
+            </form>
+
+
+            <div class="login">
+
+                Sudah punya akun?
+
+                <a href="loginpelanggan.html">
+                    Login di sini
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function (e) {
+
+                e.preventDefault();
+
+                const nama = document.getElementById("nama").value.trim();
+
+                const username = document.getElementById("username").value.trim();
+
+                const email = document.getElementById("email").value.trim();
+
+                const password = document.getElementById("password").value;
+
+                const konfirmasi = document.getElementById("konfirmasi").value;
+
+                const message = document.getElementById("message");
+
+
+                if (password.length < 6) {
+
+                    message.className = "message error";
+
+                    message.innerText = "❌ Password minimal 6 karakter.";
+
+                    return;
+
+                }
+
+
+                if (password !== konfirmasi) {
+
+                    message.className = "message error";
+
+                    message.innerText = "❌ Password tidak sama.";
+
+                    return;
+
+                }
+
+
+                let pelanggan = [];
+
+                try {
+
+                    pelanggan =
+                        JSON.parse(
+                            localStorage.getItem("daftarPelanggan")
+                        ) || [];
+
+                } catch (error) {
+
+                    pelanggan = [];
+
+                }
+
+
+                const usernameAda = pelanggan.some(function (data) {
+
+                    return String(data.username)
+                        .toLowerCase() === username.toLowerCase();
+
+                });
+
+
+                if (usernameAda) {
+
+                    message.className = "message error";
+
+                    message.innerText = "❌ Username sudah digunakan.";
+
+                    return;
+
+                }
+
+
+                const emailAda = pelanggan.some(function (data) {
+
+                    return String(data.email)
+                        .toLowerCase() === email.toLowerCase();
+
+                });
+
+
+                if (emailAda) {
+
+                    message.className = "message error";
+
+                    message.innerText = "❌ Email sudah digunakan.";
+
+                    return;
+
+                }
+
+
+                const pelangganBaru = {
+
+                    id: Date.now(),
+
+                    nama: nama,
+
+                    username: username,
+
+                    email: email,
+
+                    password: password,
+
+                    tanggalDaftar: new Date().toLocaleString("id-ID")
+
+                };
+
+
+                pelanggan.push(pelangganBaru);
+
+
+                localStorage.setItem(
+                    "daftarPelanggan",
+                    JSON.stringify(pelanggan)
+                );
+
+
+                message.className = "message success";
+
+                message.innerText =
+                    "✅ Pendaftaran berhasil! Mengarahkan ke login...";
+
+
+                document.getElementById("registerForm").reset();
+
+
+                setTimeout(function () {
+
+                    window.location.href = "loginpelanggan.html";
+
+                }, 1500);
+
+
+            });
+
+    </script>
+
+</body>
+
+</html>

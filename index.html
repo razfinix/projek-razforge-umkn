@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RazForge - Toko Buku Pemrograman</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* NAVBAR */
+
+        .navbar-custom {
+            background: linear-gradient(90deg, #081225, #0b1d46);
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 18px;
+            margin: 0 5px;
+            transition: .3s;
+            border-radius: 10px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, .15);
+            color: #38bdf8 !important;
+        }
+
+        .admin-link {
+            color: #fbbf24 !important;
+            font-weight: bold;
+        }
+
+        .pelanggan-link {
+            color: #38bdf8 !important;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .hero {
+            height: 550px;
+            background: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, .65);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 22px;
+        }
+
+        /* CARD */
+
+        .card {
+            transition: .3s;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card img {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #081225;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+        <div class="container">
+
+            <a class="navbar-brand fw-bold" href="../index.html">
+                🛠 RazForge
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            🏠 Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../projek umkn/landing/produk.html">
+                            📖 Produk
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../projek umkn/landing/kategori.html">
+                            📂 Kategori
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../projek umkn/landing/kontak.html">
+                            ☎ Kontak
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+                            🔑 Login
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="../projek umkn/admin/dashboarduser.html">
+
+                                    👨‍💼 Login Admin
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="../projek umkn/pelanggan/dashboardpelanggan.html">
+
+                                    👤 Login Pelanggan
+
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-warning fw-bold" href="../projek umkn/landing/registerpelanggan.html">
+                            📝 Daftar
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-overlay">
+
+            <div>
+
+                <h1>RazForge Books</h1>
+                <p>
+                    Selamat datang di RazForge! Tempa skill pemrogramanmu dengan koleksi buku IT terbaik kami.
+                    Temukan buku favorit Anda dengan harga terbaik.
+                </p>
+                <br>
+
+                <a href="landing/produk.html" class="btn btn-primary btn-lg">
+
+                    Lihat Produk
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PRODUK -->
+
+    <div class="container mt-5">
+
+        <h2 class="text-center mb-4">
+            🔥 Buku Terlaris
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/500/300?1">
+
+                    <div class="card-body">
+
+                        <h5>Belajar HTML & CSS</h5>
+
+                        <p>Rp75.000</p>
+
+                        <a href="landing/detail.html" class="btn btn-primary">
+
+                            Detail
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/500/300?2">
+
+                    <div class="card-body">
+
+                        <h5>JavaScript Modern</h5>
+
+                        <p>Rp95.000</p>
+
+                        <a href="landing/detail.html" class="btn btn-primary">
+
+                            Detail
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/500/300?3">
+
+                    <div class="card-body">
+
+                        <h5>Strategi Bisnis UMKM</h5>
+
+                        <p>Rp85.000</p>
+
+                        <a href="landing/detail.html" class="btn btn-primary">
+
+                            Detail
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- KEUNGGULAN -->
+
+    <div class="container mt-5">
+
+        <h2 class="text-center mb-4">
+            ⭐ Kenapa Memilih Kami?
+        </h2>
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h3>🚚</h3>
+
+                <h5>Pengiriman Cepat</h5>
+
+                <p>buku fisik & e-book siap dikirim/didalami kapan saja.</p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3>💰</h3>
+
+                <h5>Harga Terjangkau</h5>
+
+                <p>investasi skill lejit tanpa bikin dompet menjerit.</p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3>📚</h3>
+
+                <h5>Produk Lengkap</h5>
+
+                <p>modul & buku programing dari level beginer sampai advanced.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        ​<h5>🛠️ RazForge</h5>
+        <p>Platform Toko Buku Pemrograman & Edukasi Digital</p>
+        <p>&copy; 2026 RazForge. All Rights Reserved.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kategori Buku - RazForge</title>
+
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background: #f4f6f9;
+
+            color: #172033;
+
+        }
+
+
+        /* ==================================================
+           NAVBAR
+        ================================================== */
+
+        .navbar-custom {
+
+            background:
+                linear-gradient(90deg,
+                    #081225,
+                    #0b1d46);
+
+            padding: 15px 0;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, .3);
+
+        }
+
+
+        .navbar-brand {
+
+            color: white !important;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+        }
+
+
+        .nav-link {
+
+            color: white !important;
+
+            font-size: 18px;
+
+            margin: 0 5px;
+
+            transition: .3s;
+
+            border-radius: 10px;
+
+        }
+
+
+        .nav-link:hover {
+
+            background:
+                rgba(255, 255, 255, .15);
+
+            color: #38bdf8 !important;
+
+        }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        .kategori-header {
+
+            background:
+                linear-gradient(135deg,
+                    #0b1d46,
+                    #1d4ed8);
+
+            color: white;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+        }
+
+
+        .kategori-header h1 {
+
+            font-size:
+                clamp(35px,
+                    5vw,
+                    55px);
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .kategori-header p {
+
+            font-size: 20px;
+
+            color: #dbeafe;
+
+            margin: 0;
+
+        }
+
+
+        /* ==================================================
+           SEARCH
+        ================================================== */
+
+        .search-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-top: -30px;
+
+            position: relative;
+
+            z-index: 10;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .10);
+
+        }
+
+
+        .search-box label {
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* ==================================================
+           KATEGORI CARD
+        ================================================== */
+
+        .kategori-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            height: 100%;
+
+            transition: .3s;
+
+            border: none;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .kategori-card:hover {
+
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, .15);
+
+        }
+
+
+        .kategori-icon {
+
+            height: 190px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 85px;
+
+            background:
+                linear-gradient(135deg,
+                    #dbeafe,
+                    #eff6ff);
+
+        }
+
+
+        .kategori-body {
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .kategori-body h3 {
+
+            font-weight: bold;
+
+            color: #0b1d46;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .kategori-body p {
+
+            color: #64748b;
+
+            min-height: 48px;
+
+        }
+
+
+        .jumlah-buku {
+
+            display: inline-block;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            padding:
+                6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .btn-lihat {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 11px;
+
+            background:
+                linear-gradient(135deg,
+                    #0d6efd,
+                    #084298);
+
+            color: white;
+
+            font-weight: bold;
+
+            transition: .3s;
+
+        }
+
+
+        .btn-lihat:hover {
+
+            background: #084298;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* ==================================================
+           TIDAK ADA DATA
+        ================================================== */
+
+        .kosong {
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #64748b;
+
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        .footer {
+
+            background: #081225;
+
+            color: white;
+
+            padding: 20px;
+
+            text-align: center;
+
+            margin-top: 70px;
+
+        }
+
+
+        .footer p {
+
+            margin-bottom: 5px;
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+     NAVBAR
+     SAMA DENGAN PRODUK
+===================================================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+        <div class="container">
+
+
+            <!-- LOGO -->
+
+            <a class="navbar-brand fw-bold" href="../index.html">
+
+                 🛠 RazForge
+
+            </a>
+
+
+            <!-- MOBILE BUTTON -->
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                <span class="navbar-toggler-icon">
+                </span>
+
+            </button>
+
+
+            <!-- MENU -->
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <!-- BERANDA -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="../index.html">
+
+                            🏠 Beranda
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- PRODUK -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="produk.html">
+
+                            📖 Produk
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- KATEGORI -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link active" href="kategori.html">
+
+                            📂 Kategori
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- KONTAK -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="kontak.html">
+
+                            ☎ Kontak
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+                            🔑 Login
+
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+
+
+                            <li>
+
+                                <a class="dropdown-item" href="../admin/loginuser.html">
+
+                                    👨‍💼 Login Admin
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a class="dropdown-item" href="loginpelanggan.html">
+
+                                    👤 Login Pelanggan
+
+                                </a>
+
+                            </li>
+
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- DAFTAR -->
+
+                    <li class="nav-item ms-2">
+
+                        <a class="btn btn-warning fw-bold" href="registerpelanggan.html">
+
+                            📝 Daftar
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+     HEADER
+===================================================== -->
+
+    <section class="kategori-header">
+
+        <div class="container">
+
+            <h1>
+
+                📂 Kategori Buku
+
+            </h1>
+
+
+            <p>
+
+                Pilih kategori buku sesuai
+                dengan kebutuhan Anda.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+     SEARCH
+===================================================== -->
+
+    <div class="container">
+
+        <div class="search-box">
+
+            <label>
+
+                🔍 Cari Kategori
+
+            </label>
+
+
+            <input type="text" id="searchKategori" class="form-control"
+                placeholder="Contoh: Pemrograman, Bisnis, Novel..." oninput="tampilkanKategori()">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+     DAFTAR KATEGORI
+===================================================== -->
+
+    <div class="container mt-5">
+
+        <div class="row" id="kategoriContainer">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+     FOOTER
+===================================================== -->
+
+    <div class="footer">
+
+        <h5>
+
+             🛠 RazForge
+        </h5>
+
+
+        <p>
+
+             platfrom toko buku pemrogaman & IT terlengkap
+        </p>
+
+
+        <p>
+
+            © 2026 Semua Hak Dilindungi
+
+        </p>
+
+    </div>
+
+
+
+    <!-- BOOTSTRAP -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- DATABASE -->
+
+    <script src="../assets/js/database.js">
+    </script>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           DATA KATEGORI
+        ===================================================== */
+
+        let daftarKategori = [];
+
+
+        /* =====================================================
+           ICON KATEGORI
+        ===================================================== */
+
+        const iconKategori = {
+
+            "Pemrograman": "💻",
+
+            "Bisnis": "💼",
+
+            "Novel": "📖",
+
+            "Pendidikan": "🎓",
+
+            "Teknologi": "🤖",
+
+            "Agama": "📚",
+
+            "Anak": "🧒",
+
+            "UMKM": "🏪",
+
+            "Komik": "🎨",
+
+            "Motivasi": "⭐",
+
+            "default": "📚"
+
+        };
+
+
+        /* =====================================================
+           LOAD KATEGORI
+        ===================================================== */
+
+        function loadKategori() {
+
+            let produk = [];
+
+
+            if (
+                typeof ambilProduk === "function"
+            ) {
+
+                produk = ambilProduk();
+
+            }
+
+
+            const namaKategori = [];
+
+
+            produk.forEach(
+                function (item) {
+
+                    if (
+                        item.kategori
+                        &&
+                        !namaKategori.includes(
+                            item.kategori
+                        )
+                    ) {
+
+                        namaKategori.push(
+                            item.kategori
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+               Kalau database belum memiliki
+               kategori, tampilkan kategori
+               bawaan.
+            */
+
+            if (
+                namaKategori.length === 0
+            ) {
+
+                namaKategori.push(
+                    "Pemrograman",
+                    "Bisnis",
+                    "Pendidikan",
+                    "Novel",
+                    "Teknologi",
+                    "UMKM"
+                );
+
+            }
+
+
+            daftarKategori =
+                namaKategori.map(
+                    function (nama) {
+
+                        const jumlah =
+                            produk.filter(
+                                function (item) {
+
+                                    return (
+                                        item.kategori
+                                        === nama
+                                    );
+
+                                }
+                            ).length;
+
+
+                        return {
+
+                            nama: nama,
+
+                            jumlah: jumlah
+
+                        };
+
+                    }
+                );
+
+
+            tampilkanKategori();
+
+        }
+
+
+        /* =====================================================
+           TAMPILKAN KATEGORI
+        ===================================================== */
+
+        function tampilkanKategori() {
+
+            const container =
+                document.getElementById(
+                    "kategoriContainer"
+                );
+
+
+            const keyword =
+                document.getElementById(
+                    "searchKategori"
+                )
+                    .value
+                    .toLowerCase();
+
+
+            const hasil =
+                daftarKategori.filter(
+                    function (item) {
+
+                        return item.nama
+                            .toLowerCase()
+                            .includes(
+                                keyword
+                            );
+
+                    }
+                );
+
+
+            container.innerHTML = "";
+
+
+            if (
+                hasil.length === 0
+            ) {
+
+                container.innerHTML = `
+
+            <div class="col-12">
+
+                <div class="kosong">
+
+                    <h2>
+                        😥 Kategori Tidak Ditemukan
+                    </h2>
+
+                    <p>
+                        Coba cari kategori
+                        lainnya.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            hasil.forEach(
+                function (item) {
+
+                    const icon =
+                        iconKategori[
+                        item.nama
+                        ]
+                        ||
+                        iconKategori.default;
+
+
+                    container.innerHTML += `
+
+                <div
+                    class="col-lg-4
+                           col-md-6
+                           mb-4">
+
+
+                    <div
+                        class="kategori-card">
+
+
+                        <div
+                            class="kategori-icon">
+
+                            ${icon}
+
+                        </div>
+
+
+                        <div
+                            class="kategori-body">
+
+
+                            <h3>
+
+                                ${item.nama}
+
+                            </h3>
+
+
+                            <p>
+
+                                Temukan berbagai
+                                koleksi buku
+                                kategori
+                                ${item.nama}.
+
+                            </p>
+
+
+                            <div
+                                class="jumlah-buku">
+
+                                📚
+                                ${item.jumlah}
+                                Buku
+
+                            </div>
+
+
+                            <button
+                                class="btn-lihat"
+                                onclick="
+                                    bukaKategori(
+                                        '${item.nama}'
+                                    )
+                                ">
+
+                                📖 Lihat Produk
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           BUKA PRODUK SESUAI KATEGORI
+        ===================================================== */
+
+        function bukaKategori(
+            kategori
+        ) {
+
+            localStorage.setItem(
+                "filterKategori",
+                kategori
+            );
+
+
+            window.location.href =
+                "produk.html";
+
+        }
+
+
+        /* =====================================================
+           JALANKAN
+        ===================================================== */
+
+        loadKategori();
+
+
+    </script>
+
+
+</body>
+
+</html>

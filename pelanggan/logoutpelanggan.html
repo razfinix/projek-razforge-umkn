@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Logout Pelanggan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #081225, #2563eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #081225;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .loading {
+            color: #2563eb;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="card">
+
+        <div class="icon">
+            🚪
+        </div>
+
+        <h1>
+            Logout
+        </h1>
+
+        <p>
+            Anda sedang keluar dari akun...
+        </p>
+
+        <div class="loading">
+            Mohon tunggu...
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================================
+           HAPUS STATUS LOGIN
+        ========================================= */
+
+        localStorage.removeItem(
+            "pelangganLogin"
+        );
+
+        localStorage.removeItem(
+            "pelangganAktif"
+        );
+
+        localStorage.removeItem(
+            "pelanggan"
+        );
+
+        localStorage.removeItem(
+            "usernamePelanggan"
+        );
+
+        localStorage.removeItem(
+            "idPelanggan"
+        );
+
+
+        /* =========================================
+           KEMBALI KE LOGIN
+        ========================================= */
+
+        setTimeout(function () {
+
+            window.location.href =
+                "../landing/loginpelanggan.html";
+
+        }, 1000);
+
+    </script>
+
+</body>
+
+</html>

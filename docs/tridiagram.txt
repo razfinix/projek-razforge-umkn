@@ -1,0 +1,37 @@
+muliatanihub/
+│
+├── index.html
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+│
+├── docs/
+├── database/
+│
+├── pages/
+│   ├── landing/
+│   │   ├── beranda.html
+│   │   ├── kategori.html
+│   │   ├── produk.html
+│   │   ├── detailproduk.html
+│   │   ├── faq.html
+│   │   ├── kontak.html
+│   │   ├── legalitas.html
+│   │   ├── loginpelanggan.html
+│   │   ├── registerpelanggan.html
+│   │   └── loginuser.html
+│   │
+│   ├── admin/
+│   │   ├── dashboarduser.html
+│   │   ├── kelolauser.html
+│   │   ├── kelolapelanggan.html
+│   │   ├── kelolakategori.html
+│   │   ├── kelolaproduk.html
+│   │   ├── kelolapenjualan.html
+│   │   ├── keloladiskon.html
+│   │   └── laporan.html
+│   │
+│   └── pelanggan/
+│       ├── dashboardpelanggan.html
+│       └── riwayatpembelian.html

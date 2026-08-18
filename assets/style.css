@@ -1,0 +1,41 @@
+body{
+    margin:0;
+    padding:0;
+}
+
+.navbar-custom{
+    background:#111827;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+    padding:15px 0;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:bold;
+    color:white !important;
+}
+
+.navbar-brand:hover{
+    color:#60a5fa !important;
+}
+
+.nav-link{
+    color:white !important;
+    margin:0 5px;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.nav-link:hover{
+    background:#2563eb;
+    color:white !important;
+}
+
+.navbar-toggler{
+    border:none;
+}
+
+.btn-warning,
+.btn-info{
+    border-radius:10px;
+}

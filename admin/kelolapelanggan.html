@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Pelanggan - Admin</title>
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f1f5f9;
+
+            color: #172033;
+
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 82px;
+
+            background: #081225;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, .2);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+        }
+
+
+        .nav-container {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .logo {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+        }
+
+
+        .menu {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 5px;
+
+        }
+
+
+        .menu a {
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 11px 14px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            transition: .3s;
+
+        }
+
+
+        .menu a:hover {
+
+            background: #2563eb;
+
+        }
+
+
+        .menu .aktif {
+
+            background: #2563eb;
+
+        }
+
+
+        .website {
+
+            color: #38bdf8 !important;
+
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+
+            background:
+                linear-gradient(135deg,
+                    #081225,
+                    #2563eb);
+
+            color: white;
+
+            padding: 45px 5%;
+
+        }
+
+
+        .header h1 {
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .header p {
+
+            color: #dbeafe;
+
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: 30px auto 60px;
+
+        }
+
+
+        /* ================= STATISTIK ================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .stat {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .stat-icon {
+
+            font-size: 35px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .stat-title {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .stat-number {
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            color: #2563eb;
+
+        }
+
+
+        .stat.online .stat-number {
+
+            color: #16a34a;
+
+        }
+
+
+        .stat.offline .stat-number {
+
+            color: #64748b;
+
+        }
+
+
+        /* ================= CARD ================= */
+
+        .card {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .card-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .card-title h2 {
+
+            font-size: 22px;
+
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .search-box input {
+
+            flex: 1;
+
+            padding: 13px 15px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            outline: none;
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color: #2563eb;
+
+        }
+
+
+        .btn-refresh {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .btn-refresh:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 900px;
+
+        }
+
+
+        thead {
+
+            background: #081225;
+
+            color: white;
+
+        }
+
+
+        th {
+
+            padding: 15px;
+
+            text-align: left;
+
+            font-size: 14px;
+
+        }
+
+
+        td {
+
+            padding: 15px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+            font-size: 14px;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+        /* ================= USER ================= */
+
+        .user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .avatar {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+        }
+
+
+        .user-name {
+
+            font-weight: bold;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .user-type {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        .status-online {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .status-offline {
+
+            background: #f1f5f9;
+
+            color: #64748b;
+
+        }
+
+
+        /* ================= DELETE ================= */
+
+        .btn-delete {
+
+            border: none;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .btn-delete:hover {
+
+            background: #dc2626;
+
+            color: white;
+
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #64748b;
+
+        }
+
+
+        .empty-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .empty h3 {
+
+            color: #334155;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* ================= NOTIFICATION ================= */
+
+        .notification {
+
+            position: fixed;
+
+            right: 25px;
+
+            top: 100px;
+
+            background: #16a34a;
+
+            color: white;
+
+            padding: 15px 20px;
+
+            border-radius: 10px;
+
+            display: none;
+
+            z-index: 9999;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, .2);
+
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #081225;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+
+        }
+
+
+        footer p {
+
+            color: #94a3b8;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:850px) {
+
+            .navbar {
+
+                height: auto;
+
+                padding: 15px;
+
+            }
+
+
+            .nav-container {
+
+                flex-direction: column;
+
+                gap: 15px;
+
+            }
+
+
+            .menu {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+
+            <a href="dashboarduser.html" class="logo">
+
+                📚 Jasa Jual Buku
+
+            </a>
+
+
+            <ul class="menu">
+
+
+                <li>
+
+                    <a href="dashboarduser.html">
+
+                        🏠 Dashboard
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="kelolaproduk.html">
+
+                        📖 Produk
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="kelolapelanggan.html" class="aktif">
+
+                        👥 Pelanggan
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="kelolapenjualan.html">
+
+                        🛒 Penjualan
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="laporan.html">
+
+                        📊 Laporan
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="../landing/produk.html" class="website">
+
+                        🌐 Website
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="loginuser.html">
+
+                        🚪 Logout
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+     HEADER
+===================================================== -->
+
+    <section class="header">
+
+        <h1>
+
+            👥 Kelola Pelanggan
+
+        </h1>
+
+
+        <p>
+
+            Pantau pelanggan yang telah
+            mendaftar pada website.
+
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+     CONTENT
+===================================================== -->
+
+    <div class="container">
+
+
+        <!-- ================= STATISTIK ================= -->
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+
+                    👥
+
+                </div>
+
+
+                <div class="stat-title">
+
+                    Total Pelanggan
+
+                </div>
+
+
+                <div class="stat-number" id="totalPelanggan">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat online">
+
+                <div class="stat-icon">
+
+                    🟢
+
+                </div>
+
+
+                <div class="stat-title">
+
+                    Sedang Login
+
+                </div>
+
+
+                <div class="stat-number" id="totalOnline">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat offline">
+
+                <div class="stat-icon">
+
+                    ⚪
+
+                </div>
+
+
+                <div class="stat-title">
+
+                    Tidak Login
+
+                </div>
+
+
+                <div class="stat-number" id="totalOffline">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= TABLE ================= -->
+
+        <div class="card">
+
+
+            <div class="card-title">
+
+                <h2>
+
+                    📋 Daftar Pelanggan
+
+                </h2>
+
+            </div>
+
+
+            <div class="search-box">
+
+
+                <input type="text" id="search" placeholder="🔍 Cari nama, username atau email..."
+                    oninput="tampilkanData()">
+
+
+                <button class="btn-refresh" onclick="refreshData()">
+
+                    🔄 Refresh
+
+                </button>
+
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                No
+                            </th>
+
+                            <th>
+                                Pelanggan
+                            </th>
+
+                            <th>
+                                Username
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Tanggal Daftar
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tabelPelanggan">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            <div class="empty" id="emptyData">
+
+
+                <div class="empty-icon">
+
+                    👥
+
+                </div>
+
+
+                <h3>
+
+                    Belum Ada Pelanggan
+
+                </h3>
+
+
+                <p>
+
+                    Pelanggan yang melakukan
+                    pendaftaran akan muncul di sini.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= NOTIFICATION ================= -->
+
+    <div class="notification" id="notification">
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>
+
+            📚 Jasa Jual Buku
+
+        </h3>
+
+
+        <p>
+
+            Panel Administrator
+
+        </p>
+
+
+        <br>
+
+
+        <small>
+
+            © 2026 Jasa Jual Buku
+
+        </small>
+
+    </footer>
+
+
+    <script>
+
+
+        /* =====================================================
+           AMBIL DATA PELANGGAN
+        ===================================================== */
+
+        function ambilData() {
+
+            return JSON.parse(
+
+                localStorage.getItem(
+                    "daftarPelanggan"
+                )
+
+            ) || [];
+
+        }
+
+
+        /* =====================================================
+           AMBIL PELANGGAN AKTIF
+        ===================================================== */
+
+        function ambilPelangganAktif() {
+
+            const login =
+                localStorage.getItem(
+                    "pelangganLogin"
+                );
+
+
+            if (login !== "true") {
+
+                return null;
+
+            }
+
+
+            const data =
+                localStorage.getItem(
+                    "pelangganAktif"
+                );
+
+
+            if (!data) {
+
+                return null;
+
+            }
+
+
+            try {
+
+                return JSON.parse(data);
+
+            }
+
+            catch (error) {
+
+                return null;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CEK APAKAH PELANGGAN SEDANG LOGIN
+        ===================================================== */
+
+        function sedangLogin(pelanggan) {
+
+
+            const aktif =
+                ambilPelangganAktif();
+
+
+            if (!aktif) {
+
+                return false;
+
+            }
+
+
+            if (
+
+                pelanggan.username
+                &&
+                aktif.username
+
+                &&
+
+                pelanggan.username
+                    .toLowerCase()
+                ===
+                aktif.username
+                    .toLowerCase()
+
+            ) {
+
+                return true;
+
+            }
+
+
+            return false;
+
+        }
+
+
+        /* =====================================================
+           TAMPILKAN DATA
+        ===================================================== */
+
+        function tampilkanData() {
+
+
+            const data =
+                ambilData();
+
+
+            const tabel =
+                document.getElementById(
+                    "tabelPelanggan"
+                );
+
+
+            const empty =
+                document.getElementById(
+                    "emptyData"
+                );
+
+
+            const keyword =
+                document
+                    .getElementById("search")
+                    .value
+                    .toLowerCase();
+
+
+            tabel.innerHTML = "";
+
+
+            /* ================= FILTER ================= */
+
+            const hasil =
+                data.filter(
+                    function (pelanggan) {
+
+
+                        const nama =
+                            (
+                                pelanggan.nama ||
+                                ""
+                            )
+                                .toLowerCase();
+
+
+                        const username =
+                            (
+                                pelanggan.username ||
+                                ""
+                            )
+                                .toLowerCase();
+
+
+                        const email =
+                            (
+                                pelanggan.email ||
+                                ""
+                            )
+                                .toLowerCase();
+
+
+                        return (
+
+                            nama.includes(keyword)
+
+                            ||
+
+                            username.includes(keyword)
+
+                            ||
+
+                            email.includes(keyword)
+
+                        );
+
+                    }
+                );
+
+
+            /* ================= STATISTIK ================= */
+
+            let online = 0;
+
+
+            data.forEach(
+                function (pelanggan) {
+
+                    if (
+                        sedangLogin(pelanggan)
+                    ) {
+
+                        online++;
+
+                    }
+
+                }
+            );
+
+
+            document
+                .getElementById(
+                    "totalPelanggan"
+                )
+                .innerText =
+                data.length;
+
+
+            document
+                .getElementById(
+                    "totalOnline"
+                )
+                .innerText =
+                online;
+
+
+            document
+                .getElementById(
+                    "totalOffline"
+                )
+                .innerText =
+                data.length - online;
+
+
+            /* ================= KOSONG ================= */
+
+            if (hasil.length === 0) {
+
+                empty.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            empty.style.display =
+                "none";
+
+
+            /* ================= BUAT TABEL ================= */
+
+            hasil.forEach(
+                function (pelanggan, index) {
+
+
+                    const nama =
+                        pelanggan.nama ||
+                        "Pelanggan";
+
+
+                    const username =
+                        pelanggan.username ||
+                        "-";
+
+
+                    const email =
+                        pelanggan.email ||
+                        "-";
+
+
+                    const tanggal =
+                        pelanggan.tanggalDaftar ||
+                        "-";
+
+
+                    const online =
+                        sedangLogin(
+                            pelanggan
+                        );
+
+
+                    const huruf =
+                        nama
+                            .charAt(0)
+                            .toUpperCase();
+
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+
+                <td>
+
+                    <div class="user">
+
+                        <div class="avatar">
+
+                            ${huruf}
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="user-name">
+
+                                ${nama}
+
+                            </div>
+
+
+                            <div class="user-type">
+
+                                Pelanggan
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    ${username}
+
+                </td>
+
+
+                <td>
+
+                    ${email}
+
+                </td>
+
+
+                <td>
+
+                    ${tanggal}
+
+                </td>
+
+
+                <td>
+
+                    ${online
+
+                            ?
+
+                            `
+                        <span
+                            class="status status-online">
+
+                            🟢 Sedang Login
+
+                        </span>
+                        `
+
+                            :
+
+                            `
+                        <span
+                            class="status status-offline">
+
+                            ⚪ Tidak Login
+
+                        </span>
+                        `
+                        }
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="btn-delete"
+                        onclick="hapusPelanggan('${pelanggan.id}')">
+
+                        🗑 Hapus
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+                    tabel.appendChild(tr);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           HAPUS PELANGGAN
+        ===================================================== */
+
+        function hapusPelanggan(id) {
+
+
+            const yakin =
+                confirm(
+                    "Yakin ingin menghapus pelanggan ini?"
+                );
+
+
+            if (!yakin) {
+
+                return;
+
+            }
+
+
+            let data =
+                ambilData();
+
+
+            data =
+                data.filter(
+                    function (pelanggan) {
+
+                        return String(
+                            pelanggan.id
+                        ) !== String(id);
+
+                    }
+                );
+
+
+            localStorage.setItem(
+
+                "daftarPelanggan",
+
+                JSON.stringify(data)
+
+            );
+
+
+            tampilkanData();
+
+
+            tampilkanNotifikasi(
+                "✅ Pelanggan berhasil dihapus."
+            );
+
+        }
+
+
+        /* =====================================================
+           REFRESH
+        ===================================================== */
+
+        function refreshData() {
+
+            tampilkanData();
+
+
+            tampilkanNotifikasi(
+                "🔄 Data berhasil diperbarui."
+            );
+
+        }
+
+
+        /* =====================================================
+           NOTIFIKASI
+        ===================================================== */
+
+        function tampilkanNotifikasi(
+            pesan
+        ) {
+
+
+            const notif =
+                document.getElementById(
+                    "notification"
+                );
+
+
+            notif.innerText =
+                pesan;
+
+
+            notif.style.display =
+                "block";
+
+
+            setTimeout(
+                function () {
+
+                    notif.style.display =
+                        "none";
+
+                },
+                2500
+            );
+
+        }
+
+
+        /* =====================================================
+           JALANKAN SAAT HALAMAN DIBUKA
+        ===================================================== */
+
+        tampilkanData();
+
+
+        /* =====================================================
+           UPDATE OTOMATIS
+        ===================================================== */
+
+        setInterval(
+            function () {
+
+                tampilkanData();
+
+            },
+            3000
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

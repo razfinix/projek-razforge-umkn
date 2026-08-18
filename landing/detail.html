@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Buku</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* NAVBAR */
+
+        .navbar-custom {
+            background: #081225;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: white !important;
+            margin: 0 5px;
+            font-size: 17px;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            background: #1d4ed8;
+        }
+
+        .admin-link {
+            color: #fbbf24 !important;
+            font-weight: bold;
+        }
+
+        .pelanggan-link {
+            color: #38bdf8 !important;
+            font-weight: bold;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .header h1 {
+            font-size: 45px;
+            font-weight: bold;
+        }
+
+        /* DETAIL */
+
+        .detail-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+        }
+
+        .book-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .price {
+            font-size: 32px;
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .badge-custom {
+            font-size: 15px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #081225;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="../index.html">
+                📚 Jasa Jual Buku
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            🏠 Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="produk.html">
+                            📖 Produk
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="kategori.html">
+                            📂 Kategori
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html">
+                            ☎ Kontak
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link admin-link" href="../admin/dashboarduser.html">
+                            👨‍💼 Admin
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link pelanggan-link" href="../pelanggan/dashboardpelanggan.html">
+                            👤 Pelanggan
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HEADER -->
+
+    <section class="header">
+
+        <h1>📖 Detail Buku</h1>
+
+        <p>Lihat informasi lengkap buku pilihan Anda</p>
+
+    </section>
+
+    <!-- DETAIL BUKU -->
+
+    <div class="container my-5">
+
+        <div class="detail-card">
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <img src="https://picsum.photos/600/800?random=1" class="book-img">
+
+                </div>
+
+                <div class="col-md-7 p-4">
+
+                    <span class="badge bg-primary badge-custom">
+                        Pemrograman
+                    </span>
+
+                    <h2 class="mt-3">
+                        Belajar HTML & CSS dari Dasar
+                    </h2>
+
+                    <p class="text-muted">
+                        Penulis: Andi Wijaya
+                    </p>
+
+                    <h3 class="price">
+                        Rp75.000
+                    </h3>
+
+                    <hr>
+
+                    <h5>Deskripsi Buku</h5>
+
+                    <p>
+                        Buku ini membahas HTML dan CSS dari tingkat dasar hingga
+                        menengah. Cocok untuk pelajar, mahasiswa, dan pemula yang
+                        ingin belajar membuat website modern.
+                    </p>
+
+                    <ul>
+                        <li>✅ Dasar HTML</li>
+                        <li>✅ Dasar CSS</li>
+                        <li>✅ Layout Website</li>
+                        <li>✅ Responsive Design</li>
+                        <li>✅ Studi Kasus Proyek</li>
+                    </ul>
+
+                    <div class="mt-4">
+
+                        <button class="btn btn-success btn-lg" onclick="beliBuku()">
+                            🛒 Beli Sekarang
+                        </button>
+
+                        <a href="produk.html" class="btn btn-secondary btn-lg">
+                            ⬅ Kembali
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BUKU LAINNYA -->
+
+    <div class="container">
+
+        <h3 class="mb-4">
+            📚 Buku Terkait
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/400/250?random=2" class="card-img-top">
+
+                    <div class="card-body">
+
+                        <h5>JavaScript Modern</h5>
+
+                        <p>Rp95.000</p>
+
+                        <a href="detail.html" class="btn btn-primary">
+                            Lihat Detail
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/400/250?random=3" class="card-img-top">
+
+                    <div class="card-body">
+
+                        <h5>PHP Untuk Pemula</h5>
+
+                        <p>Rp85.000</p>
+
+                        <a href="detail.html" class="btn btn-primary">
+                            Lihat Detail
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow">
+
+                    <img src="https://picsum.photos/400/250?random=4" class="card-img-top">
+
+                    <div class="card-body">
+
+                        <h5>Bootstrap 5 Lengkap</h5>
+
+                        <p>Rp80.000</p>
+
+                        <a href="detail.html" class="btn btn-primary">
+                            Lihat Detail
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <h5>📚 Jasa Jual Buku</h5>
+
+        <p>Sistem Penjualan Buku Berbasis Web</p>
+
+        <p>© 2026 Semua Hak Dilindungi</p>
+
+    </footer>
+
+    <script>
+
+        function beliBuku() {
+            alert("Buku berhasil dimasukkan ke keranjang!");
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

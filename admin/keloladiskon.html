@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Diskon</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 225px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 25px 20px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #2563eb;
+        }
+
+        .main {
+            margin-left: 225px;
+            padding: 35px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tambah {
+            background: #198754;
+            color: white;
+        }
+
+        .edit {
+            background: #ffc107;
+        }
+
+        .hapus {
+            background: #dc3545;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border: 1px solid #ddd;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .55);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        .simpan {
+            background: #198754;
+            color: white;
+        }
+
+        .batal {
+            background: #64748b;
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #15803d;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        @media(max-width:800px) {
+
+            .sidebar {
+                width: 180px;
+            }
+
+            .main {
+                margin-left: 180px;
+                padding: 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Admin
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="kelolaproduk.html">
+            📖 Kelola Produk
+        </a>
+
+        <a href="kelolakatagori.html">
+            📁 Kelola Kategori
+        </a>
+
+        <a href="kelolapelanggan.html">
+            👥 Kelola Pelanggan
+        </a>
+
+        <a href="kelolapenjualan.html">
+            💰 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html" class="active">
+
+            🏷️ Kelola Diskon
+
+        </a>
+
+        <a href="kelolauser.html">
+            🔐 Kelola User
+        </a>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+        <a href="loginuser.html">
+            🚪 Logout
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="card">
+
+            <div class="header">
+
+                <h1>
+                    🏷️ Kelola Diskon
+                </h1>
+
+                <button class="tambah" onclick="bukaModal()">
+
+                    ➕ Tambah Diskon
+
+                </button>
+
+            </div>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Nama Diskon</th>
+
+                        <th>Produk</th>
+
+                        <th>Kode</th>
+
+                        <th>Diskon</th>
+
+                        <th>Status</th>
+
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tabel">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL -->
+
+    <div class="modal" id="modal">
+
+        <div class="modal-box">
+
+            <h2 id="judul">
+                Tambah Diskon
+            </h2>
+
+
+            <div class="form-group">
+
+                <label>
+                    Nama Diskon
+                </label>
+
+                <input type="text" id="nama" placeholder="Contoh: Diskon Kemerdekaan">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Pilih Produk
+                </label>
+
+                <select id="produk">
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Kode Diskon
+                </label>
+
+                <input type="text" id="kode" placeholder="Contoh: MERDEKA20">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Persentase Diskon
+                </label>
+
+                <input type="number" id="persen" placeholder="20" min="1" max="100">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Status
+                </label>
+
+                <select id="status">
+
+                    <option value="Aktif">
+                        Aktif
+                    </option>
+
+                    <option value="Nonaktif">
+                        Nonaktif
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button class="simpan" onclick="simpan()">
+
+                💾 Simpan
+
+            </button>
+
+
+            <button class="batal" onclick="tutup()">
+
+                ❌ Batal
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="../assets/js/database.js"></script>
+
+
+    <script>
+
+
+        /* ==============================
+           DATA DISKON
+        ============================== */
+
+        let dataDiskon =
+            JSON.parse(
+                localStorage.getItem(
+                    "dataDiskon"
+                )
+            ) || [];
+
+
+        let editIndex = -1;
+
+
+        /* ==============================
+           LOAD PRODUK KE SELECT
+        ============================== */
+
+        function loadProduk() {
+
+            const select =
+                document.getElementById(
+                    "produk"
+                );
+
+            const produk =
+                ambilProduk();
+
+            select.innerHTML =
+                `<option value="">
+        -- Pilih Produk --
+        </option>`;
+
+
+            produk.forEach(function (item) {
+
+                select.innerHTML += `
+
+        <option value="${item.id}">
+
+            ${item.nama}
+
+        </option>
+
+        `;
+
+            });
+
+        }
+
+
+        /* ==============================
+           TAMPILKAN DISKON
+        ============================== */
+
+        function tampilkan() {
+
+            const tabel =
+                document.getElementById(
+                    "tabel"
+                );
+
+            tabel.innerHTML = "";
+
+
+            const produk =
+                ambilProduk();
+
+
+            dataDiskon.forEach(
+                function (item, index) {
+
+                    const dataProduk =
+                        produk.find(
+                            function (p) {
+
+                                return Number(p.id)
+                                    === Number(item.idProduk);
+
+                            }
+                        );
+
+
+                    const namaProduk =
+                        dataProduk
+                            ? dataProduk.nama
+                            : "Produk tidak ditemukan";
+
+
+                    tabel.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    🏷️ ${item.nama}
+                </td>
+
+                <td>
+                    📖 ${namaProduk}
+                </td>
+
+                <td>
+                    <b>${item.kode}</b>
+                </td>
+
+                <td>
+                    <b>${item.persen}%</b>
+                </td>
+
+                <td>
+
+                    <span class="badge">
+
+                        ${item.status}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                    class="edit"
+                    onclick="editData(${index})">
+
+                        ✏️ Edit
+
+                    </button>
+
+
+                    <button
+                    class="hapus"
+                    onclick="hapus(${index})">
+
+                        🗑️ Hapus
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+                }
+            );
+
+        }
+
+
+        /* ==============================
+           BUKA MODAL
+        ============================== */
+
+        function bukaModal() {
+
+            editIndex = -1;
+
+            document.getElementById(
+                "judul"
+            ).innerText =
+                "Tambah Diskon";
+
+
+            document.getElementById(
+                "nama"
+            ).value = "";
+
+
+            document.getElementById(
+                "produk"
+            ).value = "";
+
+
+            document.getElementById(
+                "kode"
+            ).value = "";
+
+
+            document.getElementById(
+                "persen"
+            ).value = "";
+
+
+            document.getElementById(
+                "status"
+            ).value = "Aktif";
+
+
+            document.getElementById(
+                "modal"
+            ).style.display = "flex";
+
+        }
+
+
+        /* ==============================
+           TUTUP MODAL
+        ============================== */
+
+        function tutup() {
+
+            document.getElementById(
+                "modal"
+            ).style.display = "none";
+
+        }
+
+
+        /* ==============================
+           SIMPAN
+        ============================== */
+
+        function simpan() {
+
+            const nama =
+                document.getElementById(
+                    "nama"
+                ).value.trim();
+
+
+            const idProduk =
+                document.getElementById(
+                    "produk"
+                ).value;
+
+
+            const kode =
+                document.getElementById(
+                    "kode"
+                ).value.trim();
+
+
+            const persen =
+                Number(
+                    document.getElementById(
+                        "persen"
+                    ).value
+                );
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                ).value;
+
+
+            if (
+                !nama ||
+                !idProduk ||
+                !kode ||
+                !persen
+            ) {
+
+                alert(
+                    "Semua data harus diisi!"
+                );
+
+                return;
+
+            }
+
+
+            if (persen < 1 || persen > 100) {
+
+                alert(
+                    "Diskon harus antara 1% sampai 100%!"
+                );
+
+                return;
+
+            }
+
+
+            const item = {
+
+                nama: nama,
+
+                idProduk:
+                    Number(idProduk),
+
+                kode: kode,
+
+                persen: persen,
+
+                status: status
+
+            };
+
+
+            if (editIndex === -1) {
+
+                dataDiskon.push(item);
+
+            } else {
+
+                dataDiskon[
+                    editIndex
+                ] = item;
+
+            }
+
+
+            localStorage.setItem(
+
+                "dataDiskon",
+
+                JSON.stringify(
+                    dataDiskon
+                )
+
+            );
+
+
+            tampilkan();
+
+            tutup();
+
+
+            alert(
+                "Diskon berhasil disimpan!"
+            );
+
+        }
+
+
+        /* ==============================
+           EDIT
+        ============================== */
+
+        function editData(index) {
+
+            editIndex = index;
+
+            const item =
+                dataDiskon[index];
+
+
+            document.getElementById(
+                "judul"
+            ).innerText =
+                "Edit Diskon";
+
+
+            document.getElementById(
+                "nama"
+            ).value =
+                item.nama;
+
+
+            document.getElementById(
+                "produk"
+            ).value =
+                item.idProduk;
+
+
+            document.getElementById(
+                "kode"
+            ).value =
+                item.kode;
+
+
+            document.getElementById(
+                "persen"
+            ).value =
+                item.persen;
+
+
+            document.getElementById(
+                "status"
+            ).value =
+                item.status;
+
+
+            document.getElementById(
+                "modal"
+            ).style.display =
+                "flex";
+
+        }
+
+
+        /* ==============================
+           HAPUS
+        ============================== */
+
+        function hapus(index) {
+
+            if (
+                confirm(
+                    "Yakin ingin menghapus diskon ini?"
+                )
+            ) {
+
+                dataDiskon.splice(
+                    index,
+                    1
+                );
+
+
+                localStorage.setItem(
+
+                    "dataDiskon",
+
+                    JSON.stringify(
+                        dataDiskon
+                    )
+
+                );
+
+
+                tampilkan();
+
+            }
+
+        }
+
+
+        /* ==============================
+           JALANKAN
+        ============================== */
+
+        loadProduk();
+
+        tampilkan();
+
+    </script>
+
+
+</body>
+
+</html>

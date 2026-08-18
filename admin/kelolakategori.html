@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Kategori</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 225px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 25px 20px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .logo span {
+            font-size: 28px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2563eb;
+        }
+
+        .sidebar a.active {
+            background: #2563eb;
+        }
+
+        /* CONTENT */
+
+        .main {
+            margin-left: 225px;
+            padding: 35px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-tambah {
+            background: #198754;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #111;
+        }
+
+        .btn-hapus {
+            background: #dc3545;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border: 1px solid #ddd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .55);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .modal-box {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-simpan {
+            background: #198754;
+            color: white;
+        }
+
+        .btn-batal {
+            background: #64748b;
+            color: white;
+        }
+
+        @media(max-width:800px) {
+
+            .sidebar {
+                width: 180px;
+            }
+
+            .main {
+                margin-left: 180px;
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Admin
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="kelolaproduk.html">
+            📖 Kelola Produk
+        </a>
+
+        <a href="kelolakatagori.html" class="active">
+            📁 Kelola Kategori
+        </a>
+
+        <a href="kelolapelanggan.html">
+            👥 Kelola Pelanggan
+        </a>
+
+        <a href="kelolapenjualan.html">
+            💰 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🏷️ Kelola Diskon
+        </a>
+
+        <a href="kelolauser.html">
+            🔐 Kelola User
+        </a>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+        <a href="loginuser.html">
+            🚪 Logout
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="card">
+
+            <div class="header">
+
+                <h1>
+                    📁 Kelola Kategori
+                </h1>
+
+                <button class="btn btn-tambah" onclick="bukaModal()">
+
+                    ➕ Tambah Kategori
+
+                </button>
+
+            </div>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Nama Kategori</th>
+
+                        <th>Jumlah Produk</th>
+
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelKategori"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL -->
+
+    <div class="modal" id="modal">
+
+        <div class="modal-box">
+
+            <h2 id="judulModal">
+                Tambah Kategori
+            </h2>
+
+            <div class="form-group">
+
+                <label>
+                    Nama Kategori
+                </label>
+
+                <input type="text" id="namaKategori" placeholder="Contoh: Pemrograman">
+
+            </div>
+
+            <div class="modal-buttons">
+
+                <button class="btn btn-simpan" onclick="simpanKategori()">
+
+                    💾 Simpan
+
+                </button>
+
+                <button class="btn btn-batal" onclick="tutupModal()">
+
+                    ❌ Batal
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let kategori = [];
+
+        let editIndex = -1;
+
+
+        /* DATA AWAL */
+
+        const dataAwal = [
+
+            {
+                nama: "Pemrograman",
+                jumlah: 4
+            },
+
+            {
+                nama: "Database",
+                jumlah: 3
+            },
+
+            {
+                nama: "Microsoft Office",
+                jumlah: 2
+            },
+
+            {
+                nama: "Desain",
+                jumlah: 2
+            }
+
+        ];
+
+
+        function loadKategori() {
+
+            let data =
+                localStorage.getItem("kategoriBuku");
+
+            if (data) {
+
+                kategori = JSON.parse(data);
+
+            } else {
+
+                kategori = dataAwal;
+
+                localStorage.setItem(
+                    "kategoriBuku",
+                    JSON.stringify(kategori)
+                );
+
+            }
+
+            tampilkan();
+
+        }
+
+
+        function tampilkan() {
+
+            const tbody =
+                document.getElementById("tabelKategori");
+
+            tbody.innerHTML = "";
+
+
+            kategori.forEach(function (item, index) {
+
+                tbody.innerHTML += `
+
+<tr>
+
+<td>${index + 1}</td>
+
+<td>📁 ${item.nama}</td>
+
+<td>${item.jumlah}</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="btn btn-edit"
+onclick="editKategori(${index})">
+
+✏️ Edit
+
+</button>
+
+<button
+class="btn btn-hapus"
+onclick="hapusKategori(${index})">
+
+🗑️ Hapus
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+            });
+
+        }
+
+
+        function bukaModal() {
+
+            editIndex = -1;
+
+            document.getElementById("judulModal")
+                .innerText = "Tambah Kategori";
+
+            document.getElementById("namaKategori")
+                .value = "";
+
+            document.getElementById("modal")
+                .style.display = "flex";
+
+        }
+
+
+        function tutupModal() {
+
+            document.getElementById("modal")
+                .style.display = "none";
+
+        }
+
+
+        function simpanKategori() {
+
+            const nama =
+                document.getElementById("namaKategori")
+                    .value.trim();
+
+            if (nama === "") {
+
+                alert("Nama kategori harus diisi!");
+
+                return;
+
+            }
+
+
+            if (editIndex === -1) {
+
+                kategori.push({
+
+                    nama: nama,
+
+                    jumlah: 0
+
+                });
+
+            } else {
+
+                kategori[editIndex].nama = nama;
+
+            }
+
+
+            localStorage.setItem(
+                "kategoriBuku",
+                JSON.stringify(kategori)
+            );
+
+            tampilkan();
+
+            tutupModal();
+
+        }
+
+
+        function editKategori(index) {
+
+            editIndex = index;
+
+            document.getElementById("judulModal")
+                .innerText = "Edit Kategori";
+
+            document.getElementById("namaKategori")
+                .value = kategori[index].nama;
+
+            document.getElementById("modal")
+                .style.display = "flex";
+
+        }
+
+
+        function hapusKategori(index) {
+
+            if (confirm(
+                "Yakin ingin menghapus kategori ini?"
+            )) {
+
+                kategori.splice(index, 1);
+
+                localStorage.setItem(
+                    "kategoriBuku",
+                    JSON.stringify(kategori)
+                );
+
+                tampilkan();
+
+            }
+
+        }
+
+
+        loadKategori();
+
+    </script>
+
+</body>
+
+</html>
